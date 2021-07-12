@@ -1,0 +1,65 @@
+ 
+students = ["Jackson", "Sara", "Mariyam", "Suhail", "Aisha", "Al Maha", "Robinson","Houda", "Khaild", "Ihsan", "Ravi", "Selma", "Mariamma", "Dan", "Ali","Maha", "Omaima", "Mike"]
+version = "v1.0"
+courses = ["15-110", "15-112", "15-100", "67-102", "67-250", "67-262", "67-272", "67-373", "67-474"]
+command = input("Please type a number (type help to see the possible options)")
+deleted_students = []
+while command!="exit":
+    if command == "1":
+        print(len(students))
+    elif command =="2":
+        print(len(courses))
+    elif command =="3":
+        confirm = input("Hey, this is serious. Do you want to delete a student? Y/N")
+        if confirm == "Y":
+            std = input("What is the student name?")
+            if std in students:
+                students.remove(std)
+                deleted_students.append(std)
+        else:
+            break
+    elif command == "7":
+        confirm = input("Do you want to add another student?Y/N")
+        if confirm == "Y":
+            name = input("Type the name of the student")
+            if name in students:
+                print("The student already exists")
+            if name not in students:
+                students.insert(0, name)
+        else :
+            break
+    elif command =="5":
+        confirm = input("Hey, this is serious. Do you want to delete a course? Y/N")
+        if confirm == "Y":
+            course=input("What is the course code?")
+            if course in courses:
+                courses.remove(course)
+        else:
+            break
+    elif command == "8":
+        confirm = input("Do you want to add another course?Y/N")
+        if confirm == "Y":
+            code = input("Type the code of the course")
+            if code in courses:
+                print("The course already exists")
+            if code not in courses:
+                courses.insert(0, code)
+        else:
+            break
+    elif command == "4":
+        print(students)
+    elif command == "6":
+        print(courses)
+    elif command == "10":
+        print(deleted_students)
+    elif command == "help":
+        print("if the user entered 1, print the number of students \nif the user entered 2, print the number of courses \nif the user entered 3, delete a student. \nif the user entered 4, print the list of students  \nif the user entered 5, delete a course.\nif the user entered 6, print the list of courses \nif the user entered 7, insert  a student at the beginning of the list \nif the user entered 8, insert a course at the beginning of the list \nif the user entered 9, (this is left completely up to you.  \nif the user entered 10, show the list of students who have been deleted \nif the user entered -v, print the app version number \nif the user entered about, print information about the developer of the application \nif the user entered exit. Then exit the loop  ")
+    elif command == "about":
+        print ("MD Tasnim Bin Akbar. Major: CS")
+    elif command == "9":
+        print (len(deleted_students))
+    elif command == "-v":
+        print(version)
+    command = input("Ok, what else")
+    
+print("Thanks for using this application")
