@@ -1,0 +1,30 @@
+while True:
+    a = input("NUMBER")
+    class Calculator:
+        def __init__(self):
+            self.total = int(a)
+        def add (self,num):
+            self.total = self.total + num
+        def sub(self,num):
+            self.total = self.total - num
+        def mult(self, num):
+            self.total = self.total * num
+        def div(self, num):
+            self.total = self.total / num       
+        def get_total(self):
+            return self.total
+    Calculator1 = Calculator()
+    command = input("what type of arithmetic operation do you want?")
+    if command == "add":
+        Calculator1.add(int(input("Add with?")))
+        print(Calculator1.get_total())
+    elif command == "sub":
+        Calculator1.sub(int(input("Sub by?")))
+        print(Calculator1.get_total())
+    elif command == "mult":
+        Calculator1.mult(int(input("Mult with?")))
+        print(Calculator1.get_total())
+    elif command == "div":
+        Calculator1.div(int(input("Div by?")))
+        print(Calculator1.get_total())
+    
