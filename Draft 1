@@ -39,7 +39,17 @@ for a in Students_list:
     Student_gpa.append(a.get_gpa)
     Student_major.append(a.get_major)
 
+print(Students_list)
+n = 0
+a1 = input("Which students info do you want to change")
+a2 = input("What would be his/her major?")
+a3 = input("What would be his/her gpa?")
+while True:
+    if Student_names[int(n)] == str(a1):
+        break
+    else:
+        n += 1
+Students_list[int(n)].update_info(str(a2), float(a3))
+print(Students_list)
 
-
-f1.close()
 
