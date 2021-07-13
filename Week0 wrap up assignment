@@ -1,65 +1,95 @@
  
-students = ["Jackson", "Sara", "Mariyam", "Suhail", "Aisha", "Al Maha", "Robinson","Houda", "Khaild", "Ihsan", "Ravi", "Selma", "Mariamma", "Dan", "Ali","Maha", "Omaima", "Mike"]
-version = "v1.0"
-courses = ["15-110", "15-112", "15-100", "67-102", "67-250", "67-262", "67-272", "67-373", "67-474"]
-command = input("Please type a number (type help to see the possible options)")
-deleted_students = []
-while command!="exit":
-    if command == "1":
-        print(len(students))
-    elif command =="2":
-        print(len(courses))
-    elif command =="3":
-        confirm = input("Hey, this is serious. Do you want to delete a student? Y/N")
-        if confirm == "Y":
-            std = input("What is the student name?")
-            if std in students:
-                students.remove(std)
-                deleted_students.append(std)
-        else:
-            break
-    elif command == "7":
-        confirm = input("Do you want to add another student?Y/N")
-        if confirm == "Y":
-            name = input("Type the name of the student")
-            if name in students:
-                print("The student already exists")
-            if name not in students:
-                students.insert(0, name)
-        else :
-            break
-    elif command =="5":
-        confirm = input("Hey, this is serious. Do you want to delete a course? Y/N")
-        if confirm == "Y":
-            course=input("What is the course code?")
-            if course in courses:
-                courses.remove(course)
-        else:
-            break
-    elif command == "8":
-        confirm = input("Do you want to add another course?Y/N")
-        if confirm == "Y":
-            code = input("Type the code of the course")
-            if code in courses:
-                print("The course already exists")
-            if code not in courses:
-                courses.insert(0, code)
-        else:
-            break
-    elif command == "4":
-        print(students)
-    elif command == "6":
-        print(courses)
-    elif command == "10":
-        print(deleted_students)
-    elif command == "help":
-        print("if the user entered 1, print the number of students \nif the user entered 2, print the number of courses \nif the user entered 3, delete a student. \nif the user entered 4, print the list of students  \nif the user entered 5, delete a course.\nif the user entered 6, print the list of courses \nif the user entered 7, insert  a student at the beginning of the list \nif the user entered 8, insert a course at the beginning of the list \nif the user entered 9, (this is left completely up to you.  \nif the user entered 10, show the list of students who have been deleted \nif the user entered -v, print the app version number \nif the user entered about, print information about the developer of the application \nif the user entered exit. Then exit the loop  ")
-    elif command == "about":
-        print ("MD Tasnim Bin Akbar. Major: CS")
-    elif command == "9":
-        print (len(deleted_students))
-    elif command == "-v":
-        print(version)
-    command = input("Ok, what else")
+class Student:
+    def __init__(self, name, major, andrew_id, gpa):
+        self.name = name
+        self.major = major
+        self.andrew_id = andrew_id
+        self.gpa = gpa
+    def update_info(self, major, gpa):
+        self.major = major
+        self.gpa = gpa
+    def __repr__(self):
+        return self.name + " " + self.major + " " +   self.andrew_id + " " + str(self.gpa)
+    def get_name(self):
+        return self.name
+    def get_major(self):
+        return self.major 
+    def get_andrew_id(self):
+        return self.andrew_id
+    def get_gpa(self):
+        return self.gpa
+
+f1 = open("students_names.txt", "r+")
+
+Students_list = []
+Student_names = []
+Student_andrew_id = []
+Student_gpa = []
+Student_major = []
+
+for line in f1:
+    line_splitted = line.split("-")
+    temp_students = Student( line_splitted [0], line_splitted[1], line_splitted[2], float(line_splitted[3].rstrip('\n')))
+    Students_list.append(temp_students)
+
+
+for a in Students_list:
+    Student_names.append(a.get_name())
+    Student_andrew_id.append(a.get_andrew_id())
+    Student_gpa.append(a.get_gpa())
+    Student_major.append(a.get_major())
     
-print("Thanks for using this application")
+
+
+command = input("What do you want?")
+while command != "exit":
+    if command == "show":
+        print(Students_list)
+    elif command == "show student names":
+        print(Student_names)
+    elif command == "check student gpa":
+        n = 0
+        a1 = input("Which students GPA do you want to check")
+        while True:
+            if Student_names[int(n)] == str(a1):
+                break
+            else:
+                n += 1
+        GPA = float(Student_gpa[int(n)])
+        if GPA == 0.0:
+            print("F")
+        elif GPA > 0.0 and GPA <= 1.0:
+            print("D")
+        elif GPA>1.0 and GPA<=2.0:
+            print("C")
+        elif GPA >2.0 and GPA <= 3.0:
+            print("B")
+        elif GPA >3.0 and GPA <=4.0:
+            print("A")
+        
+    elif command == "edit":
+        n = 0
+        a1 = input("Which students info do you want to change")
+        a2 = input("What would be his/her major?")
+        a3 = input("What would be his/her gpa?")
+        a4 = input("What would be his/her andrew_id")
+        while True:
+            if Student_names[int(n)] == str(a1):
+                break
+            else:
+                n += 1
+        Students_list[int(n)].update_info(str(a2), float(a3))
+        
+    elif command == "represent":
+        a1 = input("Which student info do you want to see?")
+        n = 0
+        while True:
+            if Student_names[int(n)] == str(a1):
+                break
+            else:
+                n += 1
+        print(Students_list[int(n)].__repr__())
+    command = input("OK. What else?")
+print("Thank you for using this application")       
+
+f1.close()
